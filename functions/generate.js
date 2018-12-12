@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 exports.handler = function(event, context, callback) {
-  const getExpiry = () => {
+  const getExpiryDate = () => {
     return Math.floor(Date.now() / 1000) + 60 * 60;
   };
   const generateJWT = ({ expiry, claims }) => {
@@ -20,4 +20,18 @@ exports.handler = function(event, context, callback) {
   };
   const parsedBody = JSON.parse(event.body);
   console.log(parsedBody);
+
+  const expiry = getExpiryDate();
+
+  const token = generateJWT({ expiry, parsedBody });
+
+  const response = {
+    token,
+    expiry
+  };
+
+  callback(null, {
+    statusCode: 200,
+    body: JSON.stringify(response)
+  });
 };
