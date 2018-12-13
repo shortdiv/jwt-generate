@@ -15,7 +15,7 @@ exports.handler = function(event, context, callback) {
         },
         user_metadata: claims
       },
-      secret
+      "this is a secret, shhhhhh"
     );
   };
   const parsedBody = JSON.parse(event.body);
