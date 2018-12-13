@@ -19,11 +19,11 @@ exports.handler = function(event, context, callback) {
     );
   };
   const parsedBody = JSON.parse(event.body);
-  console.log(parsedBody);
-
   const expiry = getExpiryDate();
-
   const token = generateJWT({ expiry, parsedBody });
+
+  console.log(parsedBody);
+  console.log(token);
 
   const response = {
     token,
