@@ -4,7 +4,9 @@ exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
     return Math.floor(Date.now() / 1000) + 60 * 60;
   };
-  const generateJWT = ({ expiry, claims }) => {
+  const generateJWT = (expiry, claims) => {
+    console.log(expiry);
+    console.log(claims);
     jwt.sign(
       {
         expiry,
@@ -20,7 +22,7 @@ exports.handler = function(event, context, callback) {
   };
   const parsedBody = JSON.parse(event.body);
   const expiry = getExpiryDate();
-  const token = generateJWT({ expiry, parsedBody });
+  const token = generateJWT(expiry, parsedBody);
 
   console.log(parsedBody);
   console.log(token);
