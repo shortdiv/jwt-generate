@@ -42,8 +42,9 @@ export default {
       axios
         .post("/.netlify/functions/generate", JSON.stringify(data))
         .then(response => {
-          cookie.serialize("nf_jwt", response.data, {
-            expires: 1
+          const { jwt, exp } = response;
+          cookie.serialize("nf_jwt", jwt, {
+            expires: exp
           });
           this.getStringToken();
         });
