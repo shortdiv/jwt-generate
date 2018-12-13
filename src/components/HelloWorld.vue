@@ -36,7 +36,8 @@ export default {
         claims: {
           name: this.name,
           email: this.email
-        }
+        },
+        secret: "this is a secret. shhhh."
       };
       axios
         .post("/.netlify/functions/generate", JSON.stringify(data))

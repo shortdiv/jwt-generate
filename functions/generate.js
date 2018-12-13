@@ -1,35 +1,35 @@
 const jwt = require("jsonwebtoken");
+const uuidv4 = require("uuid/v4");
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
     return Math.floor(Date.now() / 1000) + 60 * 60;
   };
-  const generateJWT = (expiry, claims) => {
-    console.log(expiry);
-    console.log(claims);
+  const generateJWT = (expiry, claims, secret) => {
     jwt.sign(
       {
         expiry,
         app_metadata: {
-          authorization: {
-            roles: ["admin", "editor"]
-          }
+          user_id: uuidv4(),
+          authorization: { roles: ["admin", "editor"] }
         },
         user_metadata: claims
       },
-      "this is a secret, shhhhhh"
+      secret
     );
   };
   const parsedBody = JSON.parse(event.body);
+  const { claims, secret } = parsedBody;
+
   const expiry = getExpiryDate();
-  const token = generateJWT(expiry, parsedBody);
+  const token = generateJWT(expiry, claims, secret);
 
   console.log(parsedBody);
   console.log(token);
 
   const response = {
-    token,
-    expiry
+    jwt: token,
+    exp: expiry
   };
 
   callback(null, {

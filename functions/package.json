@@ -9,6 +9,7 @@
   "author": "Divya Sasidharan",
   "license": "MIT",
   "dependencies": {
-    "jsonwebtoken": "^8.4.0"
+    "jsonwebtoken": "^8.4.0",
+    "uuid": "^3.3.2"
   }
 }
