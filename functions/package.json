@@ -1,0 +1,14 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Divya Sasidharan",
+  "license": "MIT",
+  "dependencies": {
+    "jsonwebtoken": "^8.4.0"
+  }
+}
