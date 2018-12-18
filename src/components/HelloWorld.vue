@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     getStringToken(jwt) {
-      const jwtFromCookie = cookie.get(`nf_jwt=${jwt}`);
+      const jwtFromCookie = cookie.parse(`nf_jwt=${jwt}`);
       this.token = jwtFromCookie;
     },
     getToken: async function() {
