@@ -27,8 +27,8 @@ export default {
     };
   },
   methods: {
-    getStringToken() {
-      const jwtFromCookie = cookie.get("nf_jwt");
+    getStringToken(jwt) {
+      const jwtFromCookie = cookie.get(`nf_jwt=${jwt}`);
       this.token = jwtFromCookie;
     },
     getToken() {
@@ -39,15 +39,16 @@ export default {
         },
         secret: "this is a secret. shhhh."
       };
-      axios
-        .post("/.netlify/functions/generate", JSON.stringify(data))
-        .then(response => {
-          const { jwt, exp } = response;
-          cookie.serialize("nf_jwt", jwt, {
-            expires: exp
-          });
-          this.getStringToken();
+      try {
+        const response = await axios.post("/.netlify/functions/generate", JSON.stringify(data))
+        const { jwt, exp } = response.data;
+        cookie.serialize("nf_jwt", jwt, {
+          expires: exp
         });
+        this.getStringToken(jwt);
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 };
