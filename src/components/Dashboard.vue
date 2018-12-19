@@ -1,6 +1,16 @@
 <template>
   <div>
     <h1>This is the dashboard</h1>
+    <h2 v-if="token">Hi I am a token {{ token }}</h2>
+    <label>
+      Name:
+      <input type="text" v-model="name">
+    </label>
+    <label>
+      Email:
+      <input type="text" v-model="email">
+    </label>
+    <button @click="getToken">Generate Token</button>
   </div>
 </template>
 
@@ -52,5 +62,8 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
+}
+h2 {
+  word-break: break-all;
 }
 </style>
