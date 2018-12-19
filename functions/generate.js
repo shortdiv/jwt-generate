@@ -8,8 +8,7 @@ exports.handler = function(event, context, callback) {
       return time;
     };
     var now = new Date();
-    now.addHours(now, 1);
-    return now;
+    return addHours(now, 1);
   };
   const generateJWT = (expiry, claims, secret) =>
     jwt.sign(
