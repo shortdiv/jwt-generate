@@ -3,8 +3,12 @@ const uuidv4 = require("uuid/v4");
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
+    const addHours = function(time, hours) {
+      time.setTime(time.getTime() + hours * 60 * 60 * 1000);
+      return time;
+    };
     var now = new Date();
-    now.setTime(now.getTime() / 1000 + 60 * 60);
+    now.addHours(now, 1);
     return now;
   };
   const generateJWT = (expiry, claims, secret) =>
