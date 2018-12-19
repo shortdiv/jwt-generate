@@ -15,8 +15,10 @@
     "axios": "^0.18.0",
     "cookie": "^0.3.1",
     "jsonwebtoken": "^8.4.0",
+    "prerender-spa-plugin": "^3.4.0",
     "uuid": "^3.3.2",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",

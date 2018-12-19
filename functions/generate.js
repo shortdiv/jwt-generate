@@ -3,7 +3,9 @@ const uuidv4 = require("uuid/v4");
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
-    return Math.floor(Date.now() / 1000) + 60 * 60;
+    var now = new Date();
+    now.setTime(now.getTime() / 1000 + 60 * 60);
+    return now;
   };
   const generateJWT = (expiry, claims, secret) =>
     jwt.sign(

@@ -1,15 +1,6 @@
 <template>
   <div>
-    <h1 v-if="token">Hi I am a token {{ token }}</h1>
-    <label>
-      Name:
-      <input type="text" v-model="name">
-    </label>
-    <label>
-      Email:
-      <input type="text" v-model="email">
-    </label>
-    <button @click="getToken">Generate Token</button>
+    <h1>This is the dashboard</h1>
   </div>
 </template>
 
@@ -18,7 +9,7 @@ import axios from "axios";
 var cookie = require("cookie");
 
 export default {
-  name: "HelloWorld",
+  name: "Dashboard",
   data() {
     return {
       token: null,
@@ -61,16 +52,5 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 </style>
