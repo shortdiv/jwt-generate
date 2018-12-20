@@ -47,7 +47,7 @@ export default {
         );
         const { jwt, exp } = response.data;
         cookie.serialize("nf_jwt", jwt, {
-          expires: exp
+          expires: new Date(exp)
         });
         this.getStringToken(jwt);
       } catch (err) {
