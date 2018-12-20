@@ -32,8 +32,16 @@ exports.handler = function(event, context, callback) {
   console.log("expiry ", expiry);
 
   const response = {
-    jwt: token,
-    exp: expiry
+    statusCode: 200,
+    headers: {
+      "Set-Cookie": myCookie,
+      "Cache-Control": "no-cache",
+      "Content-Type": "text/html"
+    },
+    body: {
+      jwt: token,
+      exp: expiry
+    }
   };
 
   callback(null, {
