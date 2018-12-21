@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const uuidv4 = require("uuid/v4");
+const cookie = require("cookie");
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
@@ -28,6 +29,12 @@ exports.handler = function(event, context, callback) {
 
   const expiry = getExpiryDate();
   const token = generateJWT(expiry, claims, secret);
+
+  const netlifyCookie = cookie.serialize("nf_jwt", token, {
+    secure: true,
+    path: "/",
+    expires: new Date(expiry.toString())
+  });
 
   console.log("expiry ", expiry);
 
