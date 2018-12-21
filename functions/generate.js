@@ -30,10 +30,11 @@ exports.handler = function(event, context, callback) {
   const expiry = getExpiryDate();
   const token = generateJWT(expiry, claims, secret);
 
-  const expiresAt = new Date(expiry.toString());
-
-  console.log("expiry ", expiresAt);
-  console.log(typeof expiresAt);
+  const netlifyCookie = cookie.serialize("nf_jwt", token, {
+    secure: true,
+    path: "/",
+    expires: new Date(expiry.toString())
+  });
 
   const response = {
     jwt: token,
@@ -42,6 +43,10 @@ exports.handler = function(event, context, callback) {
 
   callback(null, {
     statusCode: 200,
+    headers: {
+      "Set-Cookie": netlifyCookie,
+      "Cache-Control": "no-cache"
+    },
     body: JSON.stringify(response)
   });
 };
