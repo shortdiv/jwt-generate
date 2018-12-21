@@ -30,9 +30,10 @@ exports.handler = function(event, context, callback) {
   const expiry = getExpiryDate();
   const token = generateJWT(expiry, claims, secret);
 
-  const exp = new Date(expiry.toString());
+  const expiresAt = new Date(expiry.toString());
 
-  console.log("expiry ", exp);
+  console.log("expiry ", expiresAt);
+  console.log(typeof expiresAt);
 
   const response = {
     jwt: token,
