@@ -38,7 +38,7 @@ export default {
           name: this.name,
           email: this.email
         },
-        secret: "this is a secret. shhhh."
+        secret: "suchSecretsMuchToHide"
       };
       try {
         const response = await axios.post(
