@@ -36,15 +36,10 @@ exports.handler = function(event, context, callback) {
     expires: new Date(expiry.toString())
   });
 
+  const response = { jwt: token, exp: expiry };
+  console.log(response);
+
   callback(null, {
-    statusCode: 200,
-    headers: {
-      "Set-Cookie": netlifyCookie,
-      "Cache-Control": "no-cache"
-    },
-    body: JSON.stringify({
-      jwt: token,
-      exp: expiry
-    })
+    body: JSON.stringify(response)
   });
 };
