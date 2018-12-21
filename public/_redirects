@@ -1,1 +1,3 @@
-/hidden_secrets/*    200!    Role=user,editor
+/protected/*    200!    Role=admin,editor
+
+/* 	/index.html	 200
