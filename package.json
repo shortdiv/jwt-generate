@@ -3,22 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "clean": "rm -rf functions-build && mkdir functions-build",
-    "zip": "cd functions && yarn install && zip -r generate.zip *",
-    "postzip": "mv functions/generate.zip functions-build",
     "serve": "vue-cli-service serve",
-    "prebuild": "npm run clean && npm run zip",
+    "serve:functions": "netlify-lambda serve functions",
     "build": "vue-cli-service build --mode development",
+    "build:functions": "netlify-lambda build functions",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "cookie": "^0.3.1",
     "jsonwebtoken": "^8.4.0",
+    "netlify-lambda": "^1.1.1",
     "prerender-spa-plugin": "^3.4.0",
     "uuid": "^3.3.2",
     "vue": "^2.5.17",
-    "vue-router": "^3.0.2"
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.2.0",

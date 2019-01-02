@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div v-show="error">{{ error }}</div>
     <h1>This is the dashboard</h1>
     <h2 v-if="token">Hi I am a token {{ token }}</h2>
     <label>
@@ -16,21 +17,32 @@
 
 <script>
 import axios from "axios";
+import { mapActions, mapState } from "vuex";
 var cookie = require("cookie");
 
 export default {
   name: "Dashboard",
   data() {
     return {
-      token: null,
       name: null,
-      email: null
+      email: null,
+      error: null
     };
   },
+  beforeRouteEnter(to, from, next) {
+    if (to.query.redirectFrom) {
+      next(vm => {
+        vm.error =
+          "Sorry, you don't have the right access to reach the route requested";
+      });
+    } else {
+      next();
+    }
+  },
   methods: {
-    getStringToken(jwt) {
-      const jwtFromCookie = cookie.parse(`nf_jwt=${jwt}`);
-      this.token = jwtFromCookie;
+    ...mapActions("auth", ["setToken"]),
+    setStringToken(jwt) {
+      this.setToken(jwt);
     },
     getToken: async function() {
       const data = {
@@ -45,15 +57,17 @@ export default {
           "/.netlify/functions/generate",
           JSON.stringify(data)
         );
-        const { jwt, exp } = response.data;
-        cookie.serialize("nf_jwt", jwt, {
-          expires: new Date(exp)
-        });
-        this.getStringToken(jwt);
+
+        this.setStringToken(jwt);
       } catch (err) {
         console.log(err);
       }
     }
+  },
+  computed: {
+    ...mapState("auth", {
+      token: state => state.token
+    })
   }
 };
 </script>
