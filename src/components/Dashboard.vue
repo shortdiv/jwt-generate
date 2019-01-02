@@ -57,7 +57,7 @@ export default {
           "/.netlify/functions/generate",
           JSON.stringify(data)
         );
-
+        const { jwt } = response.data;
         this.setStringToken(jwt);
       } catch (err) {
         console.log(err);
