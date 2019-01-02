@@ -1,6 +1,6 @@
-const jwt = require("jsonwebtoken");
-const uuidv4 = require("uuid/v4");
-const cookie = require("cookie");
+import jwt from "jsonwebtoken";
+import uuidv4 from "uuid/v4";
+import cookie from "cookie";
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
