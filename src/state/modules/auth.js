@@ -26,12 +26,12 @@ export const actions = {
       axios
         .get("/.netlify/functions/get-cookie")
         .then(result => {
-          if (!!result.data.decodedToken) {
-            reject("NO TOKEN");
-            console.log("not working");
-          } else {
+          if (result.data.decodedToken) {
             commit("SET_TOKEN", data);
             resolve(data);
+          } else {
+            reject("NO TOKEN");
+            console.log("not working");
           }
         })
         .catch(err => {
