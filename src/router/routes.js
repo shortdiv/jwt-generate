@@ -1,5 +1,6 @@
 import Dashboard from "../components/Dashboard";
 import Protected from "../components/Protected";
+import Netlify from "../components/Netlify";
 import store from "../state/store";
 
 export default [
@@ -13,6 +14,11 @@ export default [
       }
     },
     props: route => ({ redirected: route.params.redirectFrom })
+  },
+  {
+    path: "/protected_netlify",
+    name: "Netlify",
+    component: Netlify
   },
   {
     path: "/protected",
