@@ -1,10 +1,7 @@
-const cookie = require("cookie");
-const jwt = require("jsonwebtoken");
-
 exports.handler = function(event, context, callback) {
-  console.log(event);
+  console.log("hello");
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify({})
+    body: JSON.stringify({ token: "hi" })
   });
 };
