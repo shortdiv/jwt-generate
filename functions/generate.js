@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const uuidv4 = require("uuid/v4");
 const cookie = require("cookie");
 
 exports.handler = function(event, context, callback) {
@@ -16,9 +17,7 @@ exports.handler = function(event, context, callback) {
       {
         expiry,
         app_metadata: {
-          user_id: Math.random()
-            .toString(36)
-            .substr(2, 9),
+          user_id: uuidv4(),
           authorization: { roles: ["admin", "editor"] }
         },
         user_metadata: claims

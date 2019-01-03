@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const state = {
   token: null
 };
@@ -10,17 +12,27 @@ export const mutations = {
 
 export const getters = {
   hasToken(state) {
-    debugger;
     return !!state.token;
   }
 };
 
 export const actions = {
+  getToken() {
+    return new Promise((resolve, reject) => {
+      axios
+        .post("./netlify/functions/get-cookie")
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  },
   setToken({ commit }, val) {
     commit("SET_TOKEN", val);
   },
-  isLoggedIn({ commit }) {
-    debugger;
+  isLoggedIn() {
     return new Promise((resolve, reject) => {
       setTimeout(function() {
         resolve("hello");

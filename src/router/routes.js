@@ -9,7 +9,6 @@ export default [
     component: Dashboard,
     meta: {
       beforeResolve(to, from, next) {
-        debugger;
         next();
       }
     },
@@ -21,10 +20,9 @@ export default [
     component: Protected,
     meta: {
       beforeResolve: (to, from, next) => {
-        if (store.getters["auth/hasToken"]) {
+        if (store.actions["auth/getToken"]) {
           next();
         } else {
-          debugger;
           //redirect
           next({
             name: "dashboard",
