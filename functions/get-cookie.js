@@ -14,7 +14,7 @@ exports.handler = function(event, context, callback) {
   } catch (e) {
     console.log(e);
   }
-  if (!decodedToken.payload) {
+  if (!decodedToken) {
     return callback(null, {
       statusCode: 200,
       body: JSON.stringify({
