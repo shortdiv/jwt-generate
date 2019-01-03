@@ -6,6 +6,7 @@ exports.handler = function(event, context, callback) {
   const cookieHeader = headers.cookie || "";
   const cookies = cookie.parse(cookieHeader);
 
+  console.log(headers);
   let decodedToken;
   try {
     decodedToken = jwt.decode(cookies.nf_jwt, { complete: true });
