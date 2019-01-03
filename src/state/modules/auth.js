@@ -18,18 +18,17 @@ export const getters = {
 };
 
 export const actions = {
-  init() {
+  init: async function() {
     return new Promise((resolve, reject) => {
-      try {
-        const response = axios.post("./netlify/functions/get-cookie", {
-          token: "iAmToken"
+      axios
+        .post("./netlify/functions/get-cookie", { token: "iAmToken" })
+        .then(data => {
+          commit("SET_TOKEN", data);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
         });
-        console.log(response);
-        resolve(response);
-      } catch (e) {
-        console.log(e);
-        reject(e);
-      }
     });
   },
   setToken({ commit }, val) {
