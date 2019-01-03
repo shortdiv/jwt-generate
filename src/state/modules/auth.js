@@ -25,11 +25,13 @@ export const actions = {
     return new Promise((resolve, reject) => {
       axios
         .get("/.netlify/functions/get-cookie")
-        .then(data => {
-          if (data.decodedToken) {
+        .then(result => {
+          if (!!result.data.decodedToken) {
+            reject(err);
             console.log("not working");
           } else {
             commit("SET_TOKEN", data);
+            resolve(data);
           }
         })
         .catch(err => {
