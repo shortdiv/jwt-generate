@@ -21,11 +21,12 @@ export const actions = {
   init() {
     return new Promise((resolve, reject) => {
       axios
-        .post("./netlify/functions/get-cookie")
+        .post("./netlify/functions/get-cookie", { token: "iAmToken" })
         .then(data => {
           commit("SET_TOKEN", data);
         })
         .catch(err => {
+          console.log(err);
           reject(err);
         });
     });
