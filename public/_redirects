@@ -1,2 +1,1 @@
-/protected_netlify/*  /protected_netlify/index.html  200!  Role=admin,editor
-/protected_netlify/*  /index.html 401! 
+/* /index.html 200
