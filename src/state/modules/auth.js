@@ -18,7 +18,7 @@ export const getters = {
 };
 
 export const actions = {
-  init: async function() {
+  init({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .post(
