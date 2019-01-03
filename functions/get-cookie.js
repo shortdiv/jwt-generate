@@ -14,6 +14,14 @@ exports.handler = function(event, context, callback) {
   } catch (e) {
     console.log(e);
   }
+  if (!decodedToken.payload) {
+    return callback(null, {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: `Your token is invalid.`
+      })
+    });
+  }
   callback(null, {
     statusCode: 200,
     body: JSON.stringify({ decodedToken })

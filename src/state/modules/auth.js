@@ -28,7 +28,11 @@ export const actions = {
           })
         )
         .then(data => {
-          commit("SET_TOKEN", data);
+          if (data.decodedToken) {
+            console.log("not working");
+          } else {
+            commit("SET_TOKEN", data);
+          }
         })
         .catch(err => {
           console.log(err);
