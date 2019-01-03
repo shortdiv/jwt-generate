@@ -16,11 +16,6 @@ export default [
     props: route => ({ redirected: route.params.redirectFrom })
   },
   {
-    path: "/protected_netlify",
-    name: "Netlify",
-    component: Netlify
-  },
-  {
     path: "/protected",
     name: "protected",
     component: Protected,
