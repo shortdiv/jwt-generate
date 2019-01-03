@@ -1,4 +1,5 @@
 import axios from "axios";
+import cookies from "cookie";
 
 export const state = {
   token: null
@@ -17,12 +18,12 @@ export const getters = {
 };
 
 export const actions = {
-  getToken() {
+  init() {
     return new Promise((resolve, reject) => {
       axios
         .post("./netlify/functions/get-cookie")
         .then(data => {
-          resolve(data);
+          commit("SET_TOKEN", data);
         })
         .catch(err => {
           reject(err);

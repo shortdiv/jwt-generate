@@ -20,7 +20,7 @@ export default [
     component: Protected,
     meta: {
       beforeResolve: (to, from, next) => {
-        if (store.actions["auth/getToken"]) {
+        if (store.getters["auth/hasToken"]) {
           next();
         } else {
           //redirect
