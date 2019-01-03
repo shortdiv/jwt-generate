@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import routes from "./routes";
-import { resolve } from "uri-js";
 
 Vue.use(Router);
 

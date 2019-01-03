@@ -18,7 +18,10 @@ export const getters = {
 };
 
 export const actions = {
-  init({ commit }) {
+  init({ dispatch }) {
+    dispatch("getToken");
+  },
+  getToken({ commit }, val) {
     return new Promise((resolve, reject) => {
       axios
         .get("/.netlify/functions/get-cookie")

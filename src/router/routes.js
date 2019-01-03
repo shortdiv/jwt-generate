@@ -21,15 +21,22 @@ export default [
     component: Protected,
     meta: {
       beforeResolve: (to, from, next) => {
-        if (store.getters["auth/hasToken"]) {
-          next();
-        } else {
-          //redirect
-          next({
-            name: "dashboard",
-            query: { redirectFrom: to.fullPath }
+        //call axios//
+        store.actions["auth/getToken"]
+          .then(res => {
+            if (store.getters["auth/hasToken"]) {
+              next();
+            } else {
+              //redirect
+              next({
+                name: "dashboard",
+                query: { redirectFrom: to.fullPath }
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
           });
-        }
       }
     }
   }
