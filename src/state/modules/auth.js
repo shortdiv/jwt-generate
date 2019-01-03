@@ -21,12 +21,7 @@ export const actions = {
   init({ commit }) {
     return new Promise((resolve, reject) => {
       axios
-        .post(
-          "/.netlify/functions/get-cookie",
-          JSON.stringify({
-            token: "iAmToken"
-          })
-        )
+        .get("/.netlify/functions/get-cookie")
         .then(data => {
           if (data.decodedToken) {
             console.log("not working");
