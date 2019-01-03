@@ -35,7 +35,10 @@ export default [
             }
           })
           .catch(err => {
-            console.log(err);
+            next({
+              name: "dashboard",
+              query: { redirectFrom: to.fullPath }
+            });
           });
       }
     }
