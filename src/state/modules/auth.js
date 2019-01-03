@@ -21,7 +21,10 @@ export const actions = {
   init: async function() {
     return new Promise((resolve, reject) => {
       axios
-        .post("./netlify/functions/get-cookie", { token: "iAmToken" })
+        .post(
+          "./netlify/functions/get-cookie",
+          JSON.stringify({ token: "iAmToken" })
+        )
         .then(data => {
           commit("SET_TOKEN", data);
         })
