@@ -27,7 +27,7 @@ export const actions = {
         .get("/.netlify/functions/get-cookie")
         .then(result => {
           if (!!result.data.decodedToken) {
-            reject(err);
+            reject("NO TOKEN");
             console.log("not working");
           } else {
             commit("SET_TOKEN", data);
