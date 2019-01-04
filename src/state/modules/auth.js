@@ -28,10 +28,12 @@ export const actions = {
         .get("/.netlify/functions/get-cookie")
         .then(result => {
           if (result.data.decodedToken != null) {
-            commit("SET_TOKEN", result.data.decodedToken);
+            commit("SET_TOKEN", result.data.originalToken);
             resolve(result.data.decodedToken);
           } else {
             commit("SET_ERROR", result.data.message);
+            const token = result.data.originalToken || null;
+            commit("SET_TOKEN", token);
             reject("NO TOKEN");
             console.log("not working");
           }
