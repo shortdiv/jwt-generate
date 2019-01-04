@@ -5,7 +5,7 @@
         <a href="/" class="home">Home</a>
       </li>
       <li>
-        <a href="/protected_netlify">Protected</a>
+        <a href="/protected">Protected</a>
       </li>
     </ul>
     <router-view/>

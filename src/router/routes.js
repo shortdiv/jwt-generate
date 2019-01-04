@@ -22,24 +22,17 @@ export default [
     meta: {
       beforeResolve: (to, from, next) => {
         //call axios//
-        store.actions["auth/getToken"]
-          .then(res => {
-            if (store.getters["auth/hasToken"]) {
-              next();
-            } else {
-              //redirect
-              next({
-                name: "dashboard",
-                query: { redirectFrom: to.fullPath }
-              });
-            }
-          })
-          .catch(err => {
-            next({
-              name: "dashboard",
-              query: { redirectFrom: to.fullPath }
-            });
+        debugger;
+        if (store.getters["auth/hasToken"]) {
+          debugger;
+          next();
+        } else {
+          //redirect
+          next({
+            name: "dashboard",
+            query: { redirectFrom: to.fullPath }
           });
+        }
       }
     }
   }
