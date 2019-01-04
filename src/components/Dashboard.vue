@@ -39,6 +39,9 @@ export default {
       next();
     }
   },
+  beforeRouteUpdate(to, from, next) {
+    debugger;
+  },
   methods: {
     ...mapActions("auth", ["setToken"]),
     setStringToken(jwt) {
