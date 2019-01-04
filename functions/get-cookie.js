@@ -19,7 +19,7 @@ exports.handler = function(event, context, callback) {
   }
   if (decodedToken === null) {
     message = "You have not provided a valid token";
-  } else if (roles.indexOf("admin") === -1 || roles.indexOf("editor") === -1) {
+  } else if (roles.indexOf("admin") === -1 && roles.indexOf("editor") === -1) {
     message = "You do not have the right access privileges";
     decodedToken = null;
   }
