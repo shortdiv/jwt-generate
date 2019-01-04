@@ -18,7 +18,6 @@
 <script>
 import axios from "axios";
 import { mapActions, mapState } from "vuex";
-var cookie = require("cookie");
 
 export default {
   name: "Dashboard",
@@ -38,9 +37,6 @@ export default {
     } else {
       next();
     }
-  },
-  beforeRouteUpdate(to, from, next) {
-    debugger;
   },
   methods: {
     ...mapActions("auth", ["setToken"]),

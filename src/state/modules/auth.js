@@ -1,5 +1,4 @@
 import axios from "axios";
-import cookies from "cookie";
 
 export const state = {
   token: null
@@ -18,10 +17,8 @@ export const getters = {
 };
 
 export const actions = {
-  init({ dispatch }) {
-    dispatch("getToken");
-  },
-  getToken({ commit }, val) {
+  init() {},
+  getToken({ commit }) {
     return new Promise((resolve, reject) => {
       axios
         .get("/.netlify/functions/get-cookie")
@@ -42,12 +39,5 @@ export const actions = {
   },
   setToken({ commit }, val) {
     commit("SET_TOKEN", val);
-  },
-  isLoggedIn() {
-    return new Promise((resolve, reject) => {
-      setTimeout(function() {
-        resolve("hello");
-      }, 1000);
-    });
   }
 };

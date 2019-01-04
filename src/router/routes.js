@@ -1,6 +1,5 @@
 import Dashboard from "../components/Dashboard";
 import Protected from "../components/Protected";
-import Netlify from "../components/Netlify";
 import store from "../state/store";
 
 export default [
@@ -19,20 +18,18 @@ export default [
     path: "/protected",
     name: "protected",
     component: Protected,
-    meta: {
-      beforeResolve: (to, from, next) => {
-        //call axios//
-        debugger;
-        if (store.getters["auth/hasToken"]) {
-          debugger;
-          next();
-        } else {
-          //redirect
-          next({
-            name: "dashboard",
-            query: { redirectFrom: to.fullPath }
-          });
-        }
+    meta: {},
+    async beforeEnter(to, from, next) {
+      //call axios//
+      await store.dispatch("auth/getToken");
+      if (store.getters["auth/hasToken"]) {
+        next();
+      } else {
+        //redirect
+        next({
+          name: "dashboard",
+          query: { redirectFrom: to.fullPath }
+        });
       }
     }
   }
