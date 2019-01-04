@@ -12,23 +12,23 @@ exports.handler = function(event, context, callback) {
     now = addHours(now, 1);
     return new Date(now.toString());
   };
-  const generateJWT = (expiry, claims, secret) =>
+  const generateJWT = (expiry, claims, roles, secret) =>
     jwt.sign(
       {
         expiry,
         app_metadata: {
           user_id: uuidv4(),
-          authorization: { roles: ["admin", "editor"] }
+          authorization: { roles }
         },
         user_metadata: claims
       },
       secret
     );
   const parsedBody = JSON.parse(event.body);
-  const { claims, secret } = parsedBody;
+  const { claims, roles, secret } = parsedBody;
 
   const expiry = getExpiryDate();
-  const token = generateJWT(expiry, claims, secret);
+  const token = generateJWT(expiry, claims, roles, secret);
 
   const netlifyCookie = cookie.serialize("nf_jwt", token, {
     secure: true,

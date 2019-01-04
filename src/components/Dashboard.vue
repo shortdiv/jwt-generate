@@ -3,6 +3,20 @@
     <div v-show="error">{{ error }}</div>
     <h1>This is the dashboard</h1>
     <h2 v-if="token">Hi I am a token {{ token }}</h2>
+    <div>
+      <label for>
+        <input type="checkbox" name="role" value="admin" v-model="roles">
+        Admin
+      </label>
+      <label for>
+        <input type="checkbox" name="role" value="editor" v-model="roles">
+        Editor
+      </label>
+      <label for>
+        <input type="checkbox" name="role" value="visitor" v-model="roles">
+        Visitor
+      </label>
+    </div>
     <label>
       Name:
       <input type="text" v-model="name">
@@ -12,7 +26,9 @@
       <input type="text" v-model="email">
     </label>
     <button @click="generateToken">Generate Token</button>
-    <button @click="deleteToken">Delete Token</button>
+    <div>
+      <button @click="deleteToken">Delete Token</button>
+    </div>
   </div>
 </template>
 
@@ -26,6 +42,7 @@ export default {
     return {
       name: null,
       email: null,
+      roles: ["admin"],
       error: null
     };
   },
@@ -47,6 +64,7 @@ export default {
           name: this.name,
           email: this.email
         },
+        roles: this.roles,
         secret: "suchSecretsMuchToHide"
       };
       try {
