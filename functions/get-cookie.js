@@ -12,10 +12,8 @@ exports.handler = function(event, context, callback) {
     decodedToken = jwt.decode(cookies.nf_jwt, { complete: true });
     roles =
       decodedToken !== null
-        ? decodedToken.payload.app_metadata.authorization
+        ? decodedToken.payload.app_metadata.authorization.roles
         : [];
-    console.log(decodedToken);
-    console.log(roles);
   } catch (e) {
     console.log(e);
   }
