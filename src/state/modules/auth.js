@@ -1,12 +1,16 @@
 import axios from "axios";
 
 export const state = {
-  token: null
+  token: null,
+  error: null
 };
 
 export const mutations = {
   SET_TOKEN(state, val) {
     state.token = val;
+  },
+  SET_ERROR(state, val) {
+    state.error = val;
   }
 };
 
@@ -23,10 +27,11 @@ export const actions = {
       axios
         .get("/.netlify/functions/get-cookie")
         .then(result => {
-          if (result.data.decodedToken) {
+          if (result.data.decodedToken != null) {
             commit("SET_TOKEN", result.data.decodedToken);
             resolve(result.data.decodedToken);
           } else {
+            commit("SET_ERROR", result.data.message);
             reject("NO TOKEN");
             console.log("not working");
           }

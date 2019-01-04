@@ -6,8 +6,7 @@ exports.handler = function(event, context, callback) {
   const cookieHeader = headers.cookie || "";
   const cookies = cookie.parse(cookieHeader);
 
-  console.log(headers);
-  let decodedToken, roles;
+  let decodedToken, roles, message;
   try {
     decodedToken = jwt.decode(cookies.nf_jwt, { complete: true });
     roles =
@@ -17,19 +16,13 @@ exports.handler = function(event, context, callback) {
   } catch (e) {
     console.log(e);
   }
-  if (
-    decodedToken === null ||
-    (roles.indexOf("admin") === -1 || roles.indexOf("editor") === -1)
-  ) {
-    return callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: `You do not have access privileges.`
-      })
-    });
+  if (decodedToken === null) {
+    message = "You have not provided a valid token";
+  } else if (roles.indexOf("admin") === -1 || roles.indexOf("editor") === -1) {
+    message = "You do not have the right access privileges";
   }
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify({ decodedToken })
+    body: JSON.stringify({ decodedToken, message })
   });
 };

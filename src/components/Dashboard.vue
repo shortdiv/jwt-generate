@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="error">{{ error }}</div>
+    <div v-show="errorMsg">{{ errorMsg }}</div>
     <h1>This is the dashboard</h1>
     <h2 v-if="token">Hi I am a token {{ token }}</h2>
     <div>
@@ -43,13 +43,13 @@ export default {
       name: null,
       email: null,
       roles: ["admin"],
-      error: null
+      errorMsg: null
     };
   },
   beforeRouteEnter(to, from, next) {
     if (to.query.redirectFrom) {
       next(vm => {
-        vm.error =
+        vm.errorMsg =
           "Sorry, you don't have the right access to reach the route requested";
       });
     } else {
@@ -74,7 +74,7 @@ export default {
         );
         const { jwt } = response.data;
         this.setToken(jwt);
-        this.error = null;
+        this.errorMsg = null;
       } catch (err) {
         console.log(err);
       }
@@ -84,9 +84,15 @@ export default {
       this.setToken(null);
     }
   },
+  watch: {
+    error(val) {
+      this.errorMsg = val;
+    }
+  },
   computed: {
     ...mapState("auth", {
-      token: state => state.token
+      token: state => state.token,
+      error: state => state.error
     })
   },
   created() {
