@@ -11,7 +11,8 @@
       Email:
       <input type="text" v-model="email">
     </label>
-    <button @click="getToken">Generate Token</button>
+    <button @click="generateToken">Generate Token</button>
+    <button @click="deleteToken">Delete Token</button>
   </div>
 </template>
 
@@ -40,10 +41,7 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["getToken", "setToken"]),
-    setStringToken(jwt) {
-      this.setToken(jwt);
-    },
-    getToken: async function() {
+    generateToken: async function() {
       const data = {
         claims: {
           name: this.name,
@@ -57,10 +55,16 @@ export default {
           JSON.stringify(data)
         );
         const { jwt } = response.data;
-        this.setStringToken(jwt);
+        this.setToken(jwt);
       } catch (err) {
         console.log(err);
       }
+    },
+    deleteToken() {
+      await axios.get(
+        "/.netlify/functions/clear-cookie"
+      )
+      this.setToken(null)
     }
   },
   computed: {
