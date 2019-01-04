@@ -21,10 +21,12 @@ export default [
     meta: {},
     async beforeEnter(to, from, next) {
       //call axios//
-      await store.dispatch("auth/getToken");
-      if (store.getters["auth/hasToken"]) {
-        next();
-      } else {
+      try {
+        await store.dispatch("auth/getToken");
+        if (store.getters["auth/hasToken"]) {
+          next();
+        }
+      } catch (e) {
         //redirect
         next({
           name: "dashboard",
