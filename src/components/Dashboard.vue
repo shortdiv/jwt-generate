@@ -60,11 +60,9 @@ export default {
         console.log(err);
       }
     },
-    deleteToken() {
-      await axios.get(
-        "/.netlify/functions/clear-cookie"
-      )
-      this.setToken(null)
+    deleteToken: async function() {
+      await axios.get("/.netlify/functions/clear-cookie");
+      this.setToken(null);
     }
   },
   computed: {
