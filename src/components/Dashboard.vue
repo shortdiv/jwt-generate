@@ -30,7 +30,7 @@
       <button @click="deleteToken">Delete Token</button>
     </div>
     <div>
-      <a href="https://objective-brown-c0bc88.netlify.com/">Go to Gated Site</a>
+      <button @click="goToSite">Go to Gated Site</button>
     </div>
   </div>
 </template>
@@ -61,6 +61,13 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["getToken", "setToken"]),
+    goToSite: async function() {
+      await axios.get("https://objective-brown-c0bc88.netlify.com/", {
+        headers: {
+          Authorization: "Bearer " + this.token
+        }
+      });
+    },
     generateToken: async function() {
       const data = {
         claims: {
