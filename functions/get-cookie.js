@@ -7,18 +7,25 @@ exports.handler = function(event, context, callback) {
   const cookies = cookie.parse(cookieHeader);
 
   console.log(headers);
-  let decodedToken;
+  let decodedToken, roles;
   try {
     decodedToken = jwt.decode(cookies.nf_jwt, { complete: true });
+    roles =
+      decodedToken !== null
+        ? decodedToken.payload.app_metadata.authorization
+        : [];
     console.log(decodedToken);
   } catch (e) {
     console.log(e);
   }
-  if (decodedToken === null) {
+  if (
+    decodedToken === null ||
+    (roles.indexOf("admin") === -1 || roles.indexOf("editor") === -1)
+  ) {
     return callback(null, {
       statusCode: 200,
       body: JSON.stringify({
-        message: `Your token is invalid.`
+        message: `You do not have access privileges.`
       })
     });
   }
