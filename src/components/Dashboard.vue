@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("auth", ["setToken"]),
+    ...mapActions("auth", ["getToken", "setToken"]),
     setStringToken(jwt) {
       this.setToken(jwt);
     },
@@ -67,6 +67,9 @@ export default {
     ...mapState("auth", {
       token: state => state.token
     })
+  },
+  created() {
+    this.getToken();
   }
 };
 </script>
