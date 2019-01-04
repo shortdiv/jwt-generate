@@ -15,6 +15,7 @@ exports.handler = function(event, context, callback) {
         ? decodedToken.payload.app_metadata.authorization
         : [];
     console.log(decodedToken);
+    console.log(roles);
   } catch (e) {
     console.log(e);
   }
