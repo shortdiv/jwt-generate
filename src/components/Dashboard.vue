@@ -56,6 +56,7 @@ export default {
         );
         const { jwt } = response.data;
         this.setToken(jwt);
+        this.error = null;
       } catch (err) {
         console.log(err);
       }
