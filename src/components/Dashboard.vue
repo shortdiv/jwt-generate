@@ -29,6 +29,9 @@
     <div>
       <button @click="deleteToken">Delete Token</button>
     </div>
+    <div>
+      <a href="https://objective-brown-c0bc88.netlify.com/">Go to Gated Site</a>
+    </div>
   </div>
 </template>
 
