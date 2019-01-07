@@ -30,7 +30,7 @@
       <button @click="deleteToken">Delete Token</button>
     </div>
     <div>
-      <a href="https://objective-brown-c0bc88.netlify.com/">Go to Gated Site</a>
+      <a href="`https://objective-brown-c0bc88.netlify.com/?token=${this.token}`">Go to Gated Site</a>
     </div>
   </div>
 </template>
@@ -78,6 +78,7 @@ export default {
         const { jwt } = response.data;
         this.setToken(jwt);
         this.errorMsg = null;
+        //redirect//
       } catch (err) {
         console.log(err);
       }
