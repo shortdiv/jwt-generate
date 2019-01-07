@@ -25,7 +25,7 @@ exports.handler = function(event, context, callback) {
       secret
     );
   const parsedBody = JSON.parse(event.body);
-  const { claims, roles, secret } = parsedBody;
+  const { claims, roles, secret, gatedSites } = parsedBody;
 
   const expiry = getExpiryDate();
   const token = generateJWT(expiry, claims, roles, secret);
@@ -40,6 +40,11 @@ exports.handler = function(event, context, callback) {
     jwt: token,
     exp: expiry
   };
+
+  //set cookies//
+  gatedSites.map(site => {
+    `${site}/.netlify/functions/set-cookie?token=${token}`;
+  });
 
   callback(null, {
     statusCode: 200,

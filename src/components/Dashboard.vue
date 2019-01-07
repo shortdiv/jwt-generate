@@ -68,7 +68,8 @@ export default {
           email: this.email
         },
         roles: this.roles,
-        secret: "suchSecretsMuchToHide"
+        secret: "suchSecretsMuchToHide",
+        gatedSites: this.gatedSites
       };
       try {
         const response = await axios.post(
@@ -95,7 +96,8 @@ export default {
   computed: {
     ...mapState("auth", {
       token: state => state.token,
-      error: state => state.error
+      error: state => state.error,
+      gatedSites: state => state.sites
     })
   },
   created() {
