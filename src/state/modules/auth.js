@@ -2,8 +2,7 @@ import axios from "axios";
 
 export const state = {
   token: null,
-  error: null,
-  sites: ["https://objective-brown-c0bc88.netlify.com/"]
+  error: null
 };
 
 export const mutations = {

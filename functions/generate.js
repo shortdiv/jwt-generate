@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const uuidv4 = require("uuid/v4");
 const cookie = require("cookie");
+const axios = require("axios");
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
@@ -25,7 +26,7 @@ exports.handler = function(event, context, callback) {
       secret
     );
   const parsedBody = JSON.parse(event.body);
-  const { claims, roles, secret, gatedSites } = parsedBody;
+  const { claims, roles, secret } = parsedBody;
 
   const expiry = getExpiryDate();
   const token = generateJWT(expiry, claims, roles, secret);
@@ -40,11 +41,6 @@ exports.handler = function(event, context, callback) {
     jwt: token,
     exp: expiry
   };
-
-  //set cookies//
-  gatedSites.map(site => {
-    `${site}/.netlify/functions/set-cookie?token=${token}`;
-  });
 
   callback(null, {
     statusCode: 200,
