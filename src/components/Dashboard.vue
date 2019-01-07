@@ -63,7 +63,7 @@ export default {
   methods: {
     ...mapActions("auth", ["getToken", "setToken"]),
     constructURL(url) {
-      return `${url}?token=${this.token}`;
+      return `${url}?token=${this.token}&site=${url}`;
     },
     generateToken: async function() {
       const data = {
