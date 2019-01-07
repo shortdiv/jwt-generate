@@ -29,8 +29,8 @@
     <div>
       <button @click="deleteToken">Delete Token</button>
     </div>
-    <div>
-      <a href="`https://objective-brown-c0bc88.netlify.com/?token=${this.token}`">Go to Gated Site</a>
+    <div v-for="(index, site) in gatedSites" :key="site">
+      <a :href="constructURL(gatedSites)">Go to Gated Site</a>
     </div>
   </div>
 </template>
@@ -46,7 +46,8 @@ export default {
       name: null,
       email: null,
       roles: ["admin"],
-      errorMsg: null
+      errorMsg: null,
+      gatedSites: ["https://objective-brown-c0bc88.netlify.com"]
     };
   },
   beforeRouteEnter(to, from, next) {
@@ -61,6 +62,9 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["getToken", "setToken"]),
+    constructURL(url) {
+      return `${url}?token=${this.token}`;
+    },
     generateToken: async function() {
       const data = {
         claims: {
