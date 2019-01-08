@@ -122,7 +122,7 @@ export default {
     //get URL params
     const params = this.getURLParams();
     if (params.site) {
-      localStorage("redirect_url", params.site);
+      localStorage.setItem("redirect_url", params.site);
     }
   }
 };
