@@ -30,7 +30,7 @@
       <button @click="deleteToken">Delete Token</button>
     </div>
     <div v-for="(index, site) in gatedSites" :key="site">
-      <a :href="constructURL(gatedSites)">Go to Gated Site</a>
+      <a :href="site">Go to Gated Site</a>
     </div>
   </div>
 </template>
@@ -62,9 +62,6 @@ export default {
   },
   methods: {
     ...mapActions("auth", ["getToken", "setToken"]),
-    constructURL(url) {
-      return `${url}?token=${this.token}&site=${url}`;
-    },
     generateToken: async function() {
       const data = {
         claims: {
@@ -83,6 +80,12 @@ export default {
         this.setToken(jwt);
         this.errorMsg = null;
         //redirect//
+        const redirectUrl = localStorage.getItem("redirect_url");
+        if (redirectUrl) {
+          window.location.href = `/.netlify/functions/redirect?site=${redirectUrl}&token=${
+            this.token
+          }`;
+        }
       } catch (err) {
         console.log(err);
       }
@@ -90,6 +93,17 @@ export default {
     deleteToken: async function() {
       await axios.get("/.netlify/functions/clear-cookie");
       this.setToken(null);
+    },
+    getURLParams() {
+      debugger;
+      const urlParams = {};
+      const params = decodeURIComponent(window.location.search)
+        .substring(1)
+        .split("=");
+      if (params.length > 1) {
+        urlParams[params[0]] = params[1];
+      }
+      return urlParams;
     }
   },
   watch: {
@@ -105,6 +119,11 @@ export default {
   },
   created() {
     this.getToken();
+    //get URL params
+    const params = this.getURLParams();
+    if (params.site) {
+      localStorage("redirect_url", params.site);
+    }
   }
 };
 </script>
