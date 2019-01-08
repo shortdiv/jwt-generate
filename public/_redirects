@@ -1,1 +1,3 @@
+/* site=:site /.netlify/functions/handle-login-redirect?site=:site 302! Role=*
+
 /* /index.html 200
