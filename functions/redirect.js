@@ -52,10 +52,10 @@ exports.handler = function(event, context, callback) {
     app_metadata: { ...decodedToken.payload.app_metadata },
     user_metadata: decodedToken.payload.user_metadata
   };
-  comsole.log(decodedToken.payload.app_metadata.authorization)
-  console.log(newTokenData.app_metadata)
+  comsole.log(decodedToken.payload.app_metadata.authorization);
+  console.log(newTokenData.app_metadata);
 
-  const newToken = jwt.sign(newTokenD ata, "suchSecretsMuchToHide");
+  const newToken = jwt.sign(newTokenData, "suchSecretsMuchToHide");
 
   callback(null, {
     statusCode: 302,
