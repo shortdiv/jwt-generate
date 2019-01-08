@@ -46,7 +46,7 @@ exports.handler = function(event, context, callback) {
   console.log(decodedToken);
 
   const newTokenData = {
-    exp: newDate(decodedToken.payload.expiry.toString()),
+    exp: new Date(decodedToken.payload.expiry.toString()),
     app_metadata: {
       ...decodedToken.payload.app_metadata
     },
