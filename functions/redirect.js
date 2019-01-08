@@ -43,12 +43,12 @@ exports.handler = function(event, context, callback) {
       })
     });
   }
-  console.log(decodedToken);
   const timeLeftinSeconds =
     new Date(decodedToken.payload.expiry.toString()).getTime() / 1000 -
     new Date().getTime() / 1000;
+
   const newTokenData = {
-    exp: timeLeftinSeconds,
+    expiry: new Date(decodedToken.payload.expiry.toString()),
     app_metadata: { ...decodedToken.payload.app_metadata },
     user_metadata: decodedToken.payload.user_metadata
   };
