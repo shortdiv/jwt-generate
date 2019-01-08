@@ -45,31 +45,22 @@ exports.handler = function(event, context, callback) {
   }
   console.log(decodedToken);
 
-  // const newTokenData = {
-  //   sub: decodedToken.payload.sub,
-  //   exp: decodedToken.payload.exp,
-  //   email: decodedToken.payload.email,
-  //   app_metadata: {
-  //     ...decodedToken.payload.app_metadata,
-  //     authorization: {
-  //       roles: ["admin", "editor"]
-  //     }
-  //   },
-  //   user_metadata: decodedToken.payload.user_metadata
-  // };
+  const newTokenData = {
+    exp: decodedToken.payload.expiry,
+    app_metadata: {
+      ...decodedToken.payload.app_metadata
+    },
+    user_metadata: decodedToken.payload.user_metadata
+  };
 
-  // const newToken = jwt.sign(newTokenData, "suchSecretsMuchToHide");
+  const newToken = jwt.sign(newTokenData, "suchSecretsMuchToHide");
 
-  // callback(null, {
-  //   statusCode: 302,
-  //   headers: {
-  //     Location: `${redirectBaseUrl}/.netlify/functions/set-cookie?token=${newToken}&url=${redirectUrl}`,
-  //     "Cache-Control": "no-cache"
-  //   },
-  //   body: JSON.stringify({ message: "hello" })
-  // });
   callback(null, {
-    statusCode: 200,
+    statusCode: 302,
+    headers: {
+      Location: `${redirectBaseUrl}/.netlify/functions/set-cookie?token=${newToken}&url=${redirectUrl}`,
+      "Cache-Control": "no-cache"
+    },
     body: JSON.stringify({ message: "hello" })
   });
 };
