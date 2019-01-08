@@ -29,7 +29,7 @@
     <div>
       <button @click="deleteToken">Delete Token</button>
     </div>
-    <div v-for="(index, site) in gatedSites" :key="site">
+    <div v-for="(site, index) in gatedSites" :key="site">
       <a :href="site">Go to Gated Site</a>
     </div>
   </div>
