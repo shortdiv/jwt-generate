@@ -43,24 +43,11 @@ exports.handler = function(event, context, callback) {
       })
     });
   }
-  const timeLeftinSeconds =
-    new Date(decodedToken.payload.expiry.toString()).getTime() / 1000 -
-    new Date().getTime() / 1000;
-
-  const newTokenData = {
-    expiry: new Date(decodedToken.payload.expiry.toString()),
-    app_metadata: { ...decodedToken.payload.app_metadata },
-    user_metadata: decodedToken.payload.user_metadata
-  };
-  console.log(decodedToken.payload.app_metadata.authorization);
-  console.log(newTokenData.app_metadata);
-
-  const newToken = jwt.sign(newTokenData, "suchSecretsMuchToHide");
 
   callback(null, {
     statusCode: 302,
     headers: {
-      Location: `${redirectBaseUrl}/.netlify/functions/set-cookie?token=${newToken}&url=${redirectUrl}`,
+      Location: `${redirectBaseUrl}/.netlify/functions/set-cookie?token=${originalToken}&url=${redirectUrl}`,
       "Cache-Control": "no-cache"
     },
     body: JSON.stringify({ message: "hello" })
