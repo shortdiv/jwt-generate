@@ -95,7 +95,6 @@ export default {
       this.setToken(null);
     },
     getURLParams() {
-      debugger;
       const urlParams = {};
       const params = decodeURIComponent(window.location.search)
         .substring(1)
