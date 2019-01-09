@@ -44,6 +44,8 @@ exports.handler = function(event, context, callback) {
     });
   }
 
+  console.log(decodedToken.payload);
+
   callback(null, {
     statusCode: 302,
     headers: {

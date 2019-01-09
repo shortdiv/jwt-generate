@@ -9,10 +9,10 @@ exports.handler = function(event, context, callback) {
     // const expReadable = new Date(exp);
     return exp;
   };
-  const generateJWT = (expiry, claims, roles, secret) =>
+  const generateJWT = (exp, claims, roles, secret) =>
     jwt.sign(
       {
-        expiry,
+        exp,
         app_metadata: {
           user_id: uuidv4(),
           authorization: { roles }
