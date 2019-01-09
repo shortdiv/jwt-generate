@@ -5,13 +5,9 @@ const axios = require("axios");
 
 exports.handler = function(event, context, callback) {
   const getExpiryDate = () => {
-    const addHours = function(time, hours) {
-      time.setTime(time.getTime() + hours * 60 * 60 * 1000);
-      return time;
-    };
-    var now = new Date();
-    now = addHours(now, 1);
-    return new Date(now.toString());
+    const exp = Math.floor(Date.now() / 1000) + 60 * 60;
+    // const expReadable = new Date(exp);
+    return exp;
   };
   const generateJWT = (expiry, claims, roles, secret) =>
     jwt.sign(
