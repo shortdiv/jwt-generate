@@ -1,19 +1,22 @@
 <template>
   <div>
     <div v-show="errorMsg">{{ errorMsg }}</div>
-    <h1>This is the dashboard</h1>
+    <div class="text-explanation">
+    <h1>Welcome.</h1>
+    <p>This is a site used to explain JWT generation using a naïve token generation solution. Play around with the roles below to see how they affect access to the gated site. The gated site requires a token with role of admin or editor. Have fun!</p>
+    </div>
     <h2 v-if="token">Hi I am a token {{ token }}</h2>
-    <div>
-      <label for>
-        <input type="checkbox" name="role" value="admin" v-model="roles">
+    <div class="checkbox-label-group">
+      <label class="checkbox-label">
+        <input type="checkbox" name="role" value="admin" class="checkbox" v-model="roles">
         Admin
       </label>
-      <label for>
-        <input type="checkbox" name="role" value="editor" v-model="roles">
+      <label class="checkbox-label">
+        <input type="checkbox" name="role" value="editor" class="checkbox" v-model="roles">
         Editor
       </label>
-      <label for>
-        <input type="checkbox" name="role" value="visitor" v-model="roles">
+      <label class="checkbox-label">
+        <input type="checkbox" name="role" value="visitor" class="checkbox" v-model="roles">
         Visitor
       </label>
     </div>
@@ -25,12 +28,12 @@
       Email:
       <input type="text" v-model="email">
     </label>
-    <button @click="generateToken">Generate Token</button>
     <div>
+      <button @click="generateToken">Generate Token</button>
       <button @click="deleteToken">Delete Token</button>
     </div>
     <div v-for="(site, index) in gatedSites" :key="site">
-      <a :href="`/.netlify/functions/redirect?site=${site}&token=${token}`">Go to Gated Site</a>
+      <a :href="`/.netlify/functions/redirect?site=${site}&token=${token}`">Go to Gated Site >></a>
     </div>
   </div>
 </template>
@@ -128,11 +131,64 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 h3 {
   margin: 40px 0 0;
 }
 h2 {
   word-break: break-all;
+}
+p {
+  margin: 0 10em 1em 10em;
+}
+.text-explanation {
+  margin-bottom: 2em;
+  border-bottom: 1px dashed black;
+}
+.checkbox {
+  top: -.3em;
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  position: relative;
+  cursor: pointer;
+  &-label {
+    font-size: 1.5em;
+    &:not(:last-child) {
+      margin-right: 1em;
+    }
+    &-group {
+      margin-bottom: 1em;
+    }
+  }
+}
+button {
+  &:not(:last-child) {
+    margin-right: 1em;
+  }
+  margin: 2em 0;
+  background-color: #64b587;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.2em;
+  outline: none;
+  padding: 14px 25px;
+}
+a {
+  font-size: 1.5em;
+}
+input[type="text"] {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 2px solid #e9ebeb;
+  border-radius: 4px;
+  color: #0e1e25;
+  font-size: 16px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 24px;
+  padding: 6px 14px;
 }
 </style>
