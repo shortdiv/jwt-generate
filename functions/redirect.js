@@ -15,9 +15,9 @@ exports.handler = function(event, context, callback) {
   const cookies = cookie.parse(cookieHeader);
 
   if (cookieHeader === "" || !cookies.nf_jwt) {
-    const redirectToURL = redirectUrl
-      ? `${referer}?site=${redirectUrl}`
-      : referer;
+    const redirectToURL = referer.match(/\?site\=/g)
+      ? referer
+      : `${referer}?site=${redirectUrl}`;
     return callback(null, {
       statusCode: 302,
       headers: {
