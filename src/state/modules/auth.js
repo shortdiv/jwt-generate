@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const state = {
-  token: null,
+  token: "",
   error: null
 };
 
