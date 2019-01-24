@@ -30,7 +30,7 @@
       <button @click="deleteToken">Delete Token</button>
     </div>
     <div v-for="(site, index) in gatedSites" :key="site">
-      <a :href="site">Go to Gated Site</a>
+      <a :href="`/.netlify/functions/redirect?site=${site}&token=${this.token}`">Go to Gated Site</a>
     </div>
   </div>
 </template>
