@@ -4,6 +4,7 @@ const parseURL = require("url-parse");
 
 exports.handler = function(event, context, callback) {
   const params = event.queryStringParameters;
+  const referer = event.headers.referer
   const urlData = parseURL(params.site);
   const redirectBaseUrl = urlData.origin;
   const redirectUrl = urlData.href;
@@ -15,8 +16,8 @@ exports.handler = function(event, context, callback) {
 
   if (cookieHeader === "" || !cookies.nf_jwt) {
     const redirectToURL = redirectUrl
-      ? `${siteUrl}?site=${redirectUrl}`
-      : siteUrl;
+      ? `${referer}?site=${redirectUrl}`
+      : referer;
     return callback(null, {
       statusCode: 302,
       headers: {
