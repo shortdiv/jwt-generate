@@ -35,11 +35,10 @@ export const actions = {
             const token = result.data.originalToken || null;
             commit("SET_TOKEN", token);
             reject("NO TOKEN");
-            console.log("not working");
+            console.error("not working");
           }
         })
         .catch(err => {
-          console.log(err);
           reject(err);
         });
     });

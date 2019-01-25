@@ -32,7 +32,7 @@
       <button @click="generateToken">Generate Token</button>
       <button @click="deleteToken">Delete Token</button>
     </div>
-    <div v-for="(site, index) in gatedSites" :key="site">
+    <div v-for="(site) in gatedSites" :key="site">
       <a :href="`/.netlify/functions/redirect?site=${site}&token=${token}`">Go to Gated Site >></a>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
           }`;
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
     deleteToken: async function() {
