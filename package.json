@@ -8,7 +8,6 @@
     "build": "npm-run-all --parallel build:**",
     "build:app": "vue-cli-service build --mode development",
     "build:functions": "netlify-lambda build functions",
-    "postbuild": "cp -R ./public/protected_netlify/ dist/protected_netlify",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
