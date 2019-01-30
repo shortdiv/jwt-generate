@@ -50,7 +50,7 @@ export default {
       email: null,
       roles: ["admin"],
       errorMsg: null,
-      gatedSites: ["https://objective-brown-c0bc88.netlify.com"]
+      gatedSites: ["https://gated-site.netlify.com"]
     };
   },
   beforeRouteEnter(to, from, next) {
