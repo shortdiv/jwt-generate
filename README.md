@@ -1,4 +1,5 @@
 # jwt-generate
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9358f242-5077-412d-a49f-15253ff5c62c/deploy-status)](https://app.netlify.com/sites/login-to-gated-site/deploys)
 
 ## Project setup
 ```
